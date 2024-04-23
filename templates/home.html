@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <button>
+        <a href="{% url 'cart_detail' %}">
+            Cart Detail
+        </a>
+    </button>
+    <h1>Bouquets</h1>
+    {% for bouquet in bouquets %}
+        <h3>{{ bouquet.name }}</h3>
+        <h4>{{ bouquet.price }}</h4>
+        <img src="{{ bouquet.image.url }}" alt="" style="max-height: 100px">
+        <ul>
+        {% for bouquet_flower in bouquet.flowers.all %}
+            <li>{{ bouquet_flower.name }}</li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+    <h1>Flowers</h1>
+    {% for flower in flowers %}
+        <h3>{{ flower.name }}</h3>
+        <h4>{{ flower.price }}</h4>
+        <img src="{{ flower.image.url }}" alt="" style="max-height: 100px">
+        <button>
+            <a href="{% url 'cart_add' flower.id %}">
+                Add to Cart
+            </a>
+        </button>
+    {% endfor %}
+{% endblock content %}
